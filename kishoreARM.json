@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "singlePlatformSubscriptionId": {
+            "type": "string",
+            "defaultValue": "",
+            "maxLength": 36
+        },
+        "enterpriseScaleCompanyPrefix": {
+            "type": "string",
+            "maxLength": 10,
+            "metadata": {
+                "description": "Provide a prefix (max 10 characters, unique at tenant-scope) for the Management Group hierarchy and other resources created as part of Enterprise-scale."
+            }
+        
+        },
+         "currentDateTimeUtcNow": {
+            "type": "string",
+            "defaultValue": "[utcNow()]",
+            "metadata": {
+                "description": "The current date and time using the utcNow function. Used for deployment name uniqueness"
+            }
+        }
+    },
+    
+    "functions": [],
+    "variables": {
+        "deploymentSuffix": "[concat('-', '-', guid(parameters('enterpriseScaleCompanyPrefix'), parameters('currentDateTimeUtcNow')))]",
+        "deploymentNames": {
+            "mgmtGroupDeploymentName": "[take(concat('alz-MgsLite', variables('deploymentSuffix')), 64)]"
+        },
+        "deploymentUris": {
+            "managementGroups": "managementGroupTemplates/mgmtGroupStructure/mgmtGroups.json",
+            "managementGroupsLite": "managementGroupTemplates/mgmtGroupStructure/mgmtGroupsLite.json'"
+        }
+    },
+    
+    "resources": [ 
+            {
+                 "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "[variables('deploymentNames').mgmtGroupDeploymentName]",
+            //"location": "[deployment().location]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    //"contentVersion": "1.0.0.0",
+                    "relativePath": "managementGroupTemplates/mgmtGroupStructure/mgmtGroups.json"
+                },
+                "parameters": {
+                    "topLevelManagementGroupPrefix": {
+                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                    }
+                }
+            }
+            }
+    ],
+    "outputs": {}
+}
