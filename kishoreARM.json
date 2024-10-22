@@ -47,7 +47,7 @@
                 "mode": "Incremental",
                 "templateLink": {
                     //"contentVersion": "1.0.0.0",
-                    "uri": "managementGroupTemplates/mgmtGroupStructure/mgmtGroups.json"
+                    "uri": "[variables('deploymentUris').managementGroups]"
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
