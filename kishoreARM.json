@@ -9,6 +9,7 @@
         },
         "enterpriseScaleCompanyPrefix": {
             "type": "string",
+            "defaultValue": "demo",
             "maxLength": 10,
             "metadata": {
                 "description": "Provide a prefix (max 10 characters, unique at tenant-scope) for the Management Group hierarchy and other resources created as part of Enterprise-scale."
@@ -46,7 +47,7 @@
                 "mode": "Incremental",
                 "templateLink": {
                     //"contentVersion": "1.0.0.0",
-                    "relativePath": "managementGroupTemplates/mgmtGroupStructure/mgmtGroups.json"
+                    "uri": "managementGroupTemplates/mgmtGroupStructure/mgmtGroups.json"
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
