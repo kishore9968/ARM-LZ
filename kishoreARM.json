@@ -32,7 +32,7 @@
             "mgmtGroupDeploymentName": "[take(concat('alz-MgsLite', variables('deploymentSuffix')), 64)]"
         },
         "deploymentUris": {
-            "managementGroups": "managementGroupTemplates/mgmtGroupStructure/mgmtGroups.json",
+            "managementGroups": "[uri(deployment().properties.templateLink.uri, 'managementGroupTemplates/mgmtGroupStructure/mgmtGroups.json')]",
             "managementGroupsLite": "managementGroupTemplates/mgmtGroupStructure/mgmtGroupsLite.json'"
         }
     },
