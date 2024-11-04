@@ -11,7 +11,9 @@
         "platformMgs": {
             "type": "array",
             "defaultValue": [
-                "management"
+                "management",
+                "connectivity",
+                "identity"
             ],
             "metadata": {
                 "description": "Management groups for platform specific purposes, such as management, networking, identity etc."
