@@ -3,8 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "enterpriseScaleCompanyPrefix": {
-      "type": "string",
-      "value" : null
+      "type": "string"
     },
     "platformMgs": {
             "type": "array",
