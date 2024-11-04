@@ -4,6 +4,15 @@
     "parameters": {
         "enterpriseScaleCompanyPrefix": {
             "type": "string"
+        },
+        "platformMgs": {
+            "type": "array",
+            "defaultValue": [
+                "management"
+            ],
+            "metadata": {
+                "description": "Management groups for platform specific purposes, such as management, networking, identity etc."
+            }
         }
     },
     "functions": [],
