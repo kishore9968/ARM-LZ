@@ -3,17 +3,9 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "enterpriseScaleCompanyPrefix": {
-      "type": "string"
-    },
-    "platformMgs": {
-            "type": "array",
-            "defaultValue": [
-                "management"
-            ],
-            "metadata": {
-                "description": "Management groups for platform specific purposes, such as management, networking, identity etc."
-            }
-        }
+      "type": "string",
+      "defaultValue" : "demo"
+    }
   },
   
   "resources": []
