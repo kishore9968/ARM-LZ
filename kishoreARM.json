@@ -22,6 +22,15 @@
             "metadata": {
                 "description": "The current date and time using the utcNow function. Used for deployment name uniqueness"
             }
+        },
+        "platformMgs": {
+            "type": "array",
+            "defaultValue": [
+                "management"
+            ],
+            "metadata": {
+                "description": "Management groups for platform specific purposes, such as management, networking, identity etc."
+            }
         }
     },
     
