@@ -20,6 +20,33 @@
             "metadata": {
                 "description": "The current date and time using the utcNow function. Used for deployment name uniqueness"
             }
+        },
+        "platformMgs": {
+            "type": "array",
+            "defaultValue": [
+                "management",
+                "connectivity",
+                "identity"
+            ],
+            "metadata": {
+                "description": "Management groups for platform specific purposes, such as management, networking, identity etc."
+            }
+        },
+        "landingZoneMgs": {
+            "type": "array",
+            "defaultValue": [
+                "online",
+                "corp"
+            ],
+            "metadata": {
+                "description": "These are the landing zone management groups."
+            }
+        },
+        "topLevelManagementGroupPrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "Provide prefix for the management group structure."
+            }
         }
         
     },

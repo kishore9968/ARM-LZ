@@ -4,6 +4,20 @@
     "parameters": {
         "enterpriseScaleCompanyPrefix": {
             "value": "demo2" 
+        },
+        "platformMgs": {
+            "Value": [
+                "management"
+            ]
+            
+        },
+        "topLevelManagementGroupPrefix": {
+            "value": "" 
+        },
+        "landingZoneMgs": {
+            "value": [
+                "online"
+            ]
         }
     }
 }
