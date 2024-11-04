@@ -22,6 +22,15 @@
             "metadata": {
                 "description": "The current date and time using the utcNow function. Used for deployment name uniqueness"
             }
+        },
+         "platformMgs": {
+            "type": "array",
+            "defaultValue": [
+                "management"
+            ],
+            "metadata": {
+                "description": "Management groups for platform specific purposes, such as management, networking, identity etc."
+            }
         }
     },
     
@@ -29,11 +38,12 @@
     "variables": {
         "deploymentSuffix": "[concat('-', '-', guid(parameters('enterpriseScaleCompanyPrefix'), parameters('currentDateTimeUtcNow')))]",
         "deploymentNames": {
-            "mgmtGroupDeploymentName": "[take(concat('alz-MgsLite', variables('deploymentSuffix')), 64)]"
+            "mgmtGroupDeploymentName": "[take(concat('alz-MgsLite', variables('deploymentSuffix')), 64)]",
+            "roleDefsDeploymentName": "[take(concat('alz-RoleDefs', variables('deploymentSuffix')), 64)]"
         },
         "deploymentUris": {
             "managementGroups": "[uri(deployment().properties.templateLink.uri, 'managementGroupTemplates/mgmtGroupStructure/mgmtGroups.json')]",
-            "managementGroupsLite": "managementGroupTemplates/mgmtGroupStructure/mgmtGroupsLite.json'"
+            "roleDefinitions": "[uri(deployment().properties.templateLink.uri, 'managementGroupTemplates/roleDefinitions/customRoleDefinitions.json')]"
         }
     },
     
@@ -56,6 +66,25 @@
                 }
             }
             }
+            /*{
+            // Deploying ALZ Custom RBAC Role Definitions
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "[variables('deploymentNames').roleDefsDeploymentName]",
+            //"location": "[deployment().location]",
+            "scope": "[concat('Microsoft.Management/managementGroups/', parameters('enterpriseScaleCompanyPrefix'))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').mgmtGroupDeploymentName)]"
+               // "[resourceId('Microsoft.Resources/deployments', variables('esLiteDeploymentNames').mgmtGroupLiteDeploymentName)]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "[variables('deploymentUris').roleDefinitions]"
+                }
+            }
+        }*/
             
     ],
     "outputs": {}

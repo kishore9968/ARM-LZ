@@ -4,6 +4,15 @@
     "parameters": {
         "enterpriseScaleCompanyPrefix": {
             "type": "string"
+        },
+        "platformMgs": {
+            "type": "array",
+            "defaultValue": [
+                "management"
+            ],
+            "metadata": {
+                "description": "Management groups for platform specific purposes, such as management, networking, identity etc."
+            }
         }
     },
     "functions": [],
@@ -16,7 +25,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/kishore9968/ARM-LZ/main/eslzArm.json",
+                    "uri": "https://raw.githubusercontent.com/kishore9968/ARM-LZ/main/kishoreARM.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {}
