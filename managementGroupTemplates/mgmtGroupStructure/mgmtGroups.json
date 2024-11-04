@@ -11,7 +11,9 @@
         "platformMgs": {
             "type": "array",
             "defaultValue": [
-                "management"
+                "management",
+                "connectivity",
+                "identity"
             ],
             "metadata": {
                 "description": "Management groups for platform specific purposes, such as management, networking, identity etc."
@@ -117,7 +119,7 @@
                 }
             }
         },        
-        /*{
+        {
             // Create child management groups for platform resources
             "condition": "[not(empty(parameters('platformMgs')))]",
             "type": "Microsoft.Management/managementGroups",
@@ -139,7 +141,7 @@
                     }
                 }
             }
-        },*/
+        },
         {
             // Create child management groups for landing zones
             "condition": "[not(empty(parameters('landingZoneMgs')))]",
