@@ -117,7 +117,7 @@
                 }
             }
         },        
-        {
+        /*{
             // Create child management groups for platform resources
             "condition": "[not(empty(parameters('platformMgs')))]",
             "type": "Microsoft.Management/managementGroups",
@@ -139,7 +139,7 @@
                     }
                 }
             }
-        },
+        },*/
         {
             // Create child management groups for landing zones
             "condition": "[not(empty(parameters('landingZoneMgs')))]",
