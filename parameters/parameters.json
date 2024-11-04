@@ -3,7 +3,8 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "enterpriseScaleCompanyPrefix": {
-      "type": "string"// Make sure this is globally unique
+      "type": "string",
+      "defaultValue": "demo"
     }
   },
   "resources": []
