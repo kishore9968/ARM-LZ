@@ -23,8 +23,12 @@
                     "uri": "https://raw.githubusercontent.com/kishore9968/ARM-LZ/main/kishoreARM.json",
                     "contentVersion": "1.0.0.0"
                 },
-                "parameters": {}
+                "parameters": {
+                    "enterpriseScaleCompanyPrefix": {
+                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                }
             }
+        }
         }
     ],
     "outputs": {}
