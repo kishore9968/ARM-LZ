@@ -2101,12 +2101,12 @@
             "germanycentral": "gec",
             "germanynortheast": "gne"
         },
-        "privateDnsZonesMerge": "[if(and(contains(variables('azBackupGeoCodes'), parameters('connectivityLocation')), contains(variables('privateDnsZones'), 'privatelink.regionGeoShortCode.backup.windowsazure.com')), union(createArray(replace(variables('privateDnsZones')[0], '.regionGeoShortCode.', concat('.', variables('azBackupGeoCodes')[toLower(parameters('connectivityLocation'))], '.'))), variables('privateDnsZones')), variables('privateDnsZones'))]",
+        /*"privateDnsZonesMerge": "[if(and(contains(variables('azBackupGeoCodes'), parameters('connectivityLocation')), contains(variables('privateDnsZones'), 'privatelink.regionGeoShortCode.backup.windowsazure.com')), union(createArray(replace(variables('privateDnsZones')[0], '.regionGeoShortCode.', concat('.', variables('azBackupGeoCodes')[toLower(parameters('connectivityLocation'))], '.'))), variables('privateDnsZones')), variables('privateDnsZones'))]",
         "privateDnsZonesMergedWithBackupPlaceholderRemoved": "[filter(variables('privateDnsZonesMerge'), lambda('i', not(equals(lambdaVariables('i'), 'privatelink.regionGeoShortCode.backup.windowsazure.com'))))]",
         "subscriptionIds": "[union(parameters('onlineLzSubscriptionId'), parameters('corpLzSubscriptionId'), map(parameters('corpConnectedLzSubscriptionId'), lambda('sub', lambdaVariables('sub').subs)), if(empty(parameters('singlePlatformSubscriptionId')), if(empty(parameters('connectivitySubscriptionId')), createArray(parameters('managementSubscriptionId'), parameters('identitySubscriptionId')), createArray(parameters('managementSubscriptionId'), parameters('connectivitySubscriptionId'), parameters('identitySubscriptionId'))), createArray(parameters('singlePlatformSubscriptionId'))))]",
         "roleDefinitions": {
             "networkContributor": "4d97b98b-1d4f-4787-a291-c67834d212e7"
-        },
+        },*/
         
         "cuaid": "35c42e79-00b3-42eb-a9ac-e542953efb3c",
         "cuaidSinglePlatformSub": "b35a8452-8a67-49f9-b1a9-1aee3c1a13c2",
@@ -4397,7 +4397,7 @@
                 }
             }
         },
-        {
+        /*{
             // Assigning Microsoft Defender for Cloud configurations to subscriptions if condition is true (not policy)
             "condition": "[and(equals(parameters('enableAsc'), 'Yes'), not(empty(variables('subscriptionIds'))))]",
             "type": "Microsoft.Resources/deployments",
@@ -4475,7 +4475,7 @@
                     }
                 }
             }
-        },
+        },*/
         {
             // Assigning Azure Security Center configuration policy initiative to intermediate root management group if condition is true
             "condition": "[and(or(not(empty(parameters('managementSubscriptionId'))), not(empty(parameters('singlePlatformSubscriptionId')))), equals(parameters('enableAsc'), 'Yes'), equals(environment().resourceManager, 'https://management.azure.com/'))]",
@@ -4821,7 +4821,7 @@
             "apiVersion": "2020-10-01",
             "name": "[variables('deploymentNames').ddosDeploymentName]",
             "subscriptionId": "[parameters('connectivitySubscriptionId')]",
-            "resourceGroup": "[variables('platformRgNames').ddosRg]",
+            //"resourceGroup": "[variables('platformRgNames').ddosRg]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').ddosRgDeploymentName)]",
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').activityDiagnosticsPolicyDeploymentName)]",
@@ -5211,7 +5211,7 @@
                 }
             }
         },
-        {
+        /*{
             // Creating Private DNS Zones into the connectivity subscription and linking them to a secondary location if provided.
             "condition": "[and(equals(parameters('enablePrivateDnsZones'), 'Yes'), not(empty(parameters('connectivitySubscriptionId'))))]",
             "type": "Microsoft.Resources/deployments",
@@ -5337,7 +5337,7 @@
                         }
                     }
                 }
-            },
+            },*/
         /*
             The following optional deployment will configure virtual network hub into the connectivity subscription for a secondary region
         */
@@ -5570,7 +5570,7 @@
             "apiVersion": "2020-10-01",
             "name": "[variables('deploymentNames').vnetConnectivityRouteTableDeploymentName]",
             "subscriptionId": "[parameters('connectivitySubscriptionId')]",
-            "resourceGroup": "[variables('platformRgNames').connectivityRg]",
+            //"resourceGroup": "[variables('platformRgNames').connectivityRg]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').privateDnsZoneRgDeploymentName)]",
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]",
@@ -5617,7 +5617,7 @@
             "apiVersion": "2020-10-01",
             "name": "[variables('deploymentNames').vnetConnectivityRouteTable2DeploymentName]",
             "subscriptionId": "[parameters('connectivitySubscriptionId')]",
-            "resourceGroup": "[variables('platformRgNames').connectivityRgSecondary]",
+            //"resourceGroup": "[variables('platformRgNames').connectivityRgSecondary]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').privateDnsZoneRgDeploymentName)]",
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]",
@@ -5697,7 +5697,7 @@
                 }
             }
         },
-        {
+        /*{
             // Assigning RBAC for Private DNS Zone Policy assignment to the connectivity hub
             "condition": "[equals(parameters('enablePrivateDnsZonesForLzs'), 'Yes')]",
             "type": "Microsoft.Resources/deployments",
@@ -5726,7 +5726,7 @@
                     }
                 }
             }
-        },
+        },*/
         {
             // Assigning Azure Monitor for VMs policy initiative to platform management group if condition is true
             "condition": "[and(or(not(empty(parameters('managementSubscriptionId'))), not(empty(parameters('singlePlatformSubscriptionId')))), equals(parameters('enableLogAnalytics'), 'Yes'), or(equals(parameters('enableVmMonitoring'), 'Yes'), equals(parameters('enableVmMonitoring'), 'Audit')), equals(parameters('enableVmInsights'), 'Yes'))]",
@@ -6818,7 +6818,7 @@
                 }
             }
         },
-        {
+        /*{
             // Assigning policy to audit deployment of Private Link Private DNS Zones to corp landing zones management group if condition is true
             "condition": "[or(equals(parameters('auditPeDnsZones'), 'Yes'), equals(parameters('auditPeDnsZones'), 'Audit'))]",
             "type": "Microsoft.Resources/deployments",
@@ -6847,7 +6847,7 @@
                     }
                 }
             }
-        },
+        },*/
         {
             // Assigning policy to audit deployment of WAF on Application Gateways to landing zones management group if condition is true
             "condition": "[or(equals(parameters('auditAppGwWaf'), 'Yes'), equals(parameters('auditAppGwWaf'), 'Audit'))]",
@@ -7871,7 +7871,7 @@
             "apiVersion": "2020-10-01",
             "name": "[variables('esLiteDeploymentNames').ddosLiteDeploymentName]",
             "subscriptionId": "[parameters('singlePlatformSubscriptionId')]",
-            "resourceGroup": "[variables('platformRgNames').ddosRg]",
+            //"resourceGroup": "[variables('platformRgNames').ddosRg]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('esLiteDeploymentNames').ddosRgLiteDeploymentName)]"
             ],
@@ -7969,7 +7969,7 @@
          /*
             Note: ES Lite only: deploy private DNS zones for primary region
         */
-        {
+        /*{
             // Creating Private DNS Zones into the connectivity subscription for only a primary region, and linking them to the secondary if provided.
             "condition": "[and(equals(parameters('enablePrivateDnsZones'), 'Yes'), not(empty(parameters('singlePlatformSubscriptionId'))))]",
             "type": "Microsoft.Resources/deployments",
@@ -8015,11 +8015,11 @@
                     }
                 }
             }
-        },
+        },*/
         /*
             Note: ES Lite only: deploy private DNS zones in a secondary region
         */
-        {
+        /*{
             // Creating Private DNS Zones into the connectivity subscription for a secondary region
             "condition": "[and(equals(parameters('enablePrivateDnsZonesSecondary'), 'Yes'), not(empty(parameters('singlePlatformSubscriptionId'))))]",
             "type": "Microsoft.Resources/deployments",
@@ -8062,7 +8062,7 @@
                     }
                 }
             }
-        },
+        },*/
         /*
             Note: ES Lite only: assign DDoS policy for landing zones
         */
@@ -8642,7 +8642,7 @@
             "apiVersion": "2020-10-01",
             "name": "[variables('esLitedeploymentNames').vnetConnectivityRouteTableDeploymentName]",
             "subscriptionId": "[parameters('singlePlatformSubscriptionId')]",
-            "resourceGroup": "[variables('platformRgNames').connectivityRg]",
+            //"resourceGroup": "[variables('platformRgNames').connectivityRg]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('esLitedeploymentNames').privateDnsZoneRgLiteDeploymentName)]",
                 "[resourceId('Microsoft.Resources/deployments', variables('esLitedeploymentNames').vnetConnectivityHubLiteDeploymentName)]",
@@ -8692,7 +8692,7 @@
             "apiVersion": "2020-10-01",
             "name": "[variables('esLitedeploymentNames').vnetConnectivityRouteTable2DeploymentName]",
             "subscriptionId": "[parameters('singlePlatformSubscriptionId')]",
-            "resourceGroup": "[variables('platformRgNames').connectivityRgSecondary]",
+            //"resourceGroup": "[variables('platformRgNames').connectivityRgSecondary]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('esLitedeploymentNames').privateDnsZoneRgLiteDeploymentName)]",
                 "[resourceId('Microsoft.Resources/deployments', variables('esLitedeploymentNames').vnetConnectivityHubLiteDeploymentName)]",
