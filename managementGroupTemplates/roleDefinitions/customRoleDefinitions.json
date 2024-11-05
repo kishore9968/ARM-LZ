@@ -8,6 +8,14 @@
       "templateHash": "12429908550017328445"
     }
   },
+  "parameters": {
+    "topLevelManagementGroupPrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "Provide prefix for the management group structure."
+            }
+        }
+  },
   "variables": {
     "$fxv#0": {
       "name": "c9a07a05-a1fc-53fe-a565-5eed25597c03",
@@ -33,7 +41,7 @@
           }
         ],
         "assignableScopes": [
-          "/providers/Microsoft.Management/managementGroups/contoso"
+          "variables('topLevelManagementGroupPrefix')"
         ]
       }
     },
@@ -59,7 +67,7 @@
           }
         ],
         "assignableScopes": [
-          "/providers/Microsoft.Management/managementGroups/contoso"
+          "variables('topLevelManagementGroupPrefix')"
         ]
       }
     },
@@ -93,7 +101,7 @@
           }
         ],
         "assignableScopes": [
-          "/providers/Microsoft.Management/managementGroups/contoso"
+          "variables('topLevelManagementGroupPrefix')"
         ]
       }
     },
@@ -122,7 +130,7 @@
           }
         ],
         "assignableScopes": [
-          "/providers/Microsoft.Management/managementGroups/contoso"
+          "variables('topLevelManagementGroupPrefix')"
         ]
       }
     },
@@ -138,6 +146,7 @@
       "AzureChinaCloud": [],
       "AzureUSGovernment": []
     },
+    "topLevelManagementGroupPrefix": "[concat('/providers/Microsoft.Management/managementGroups/contoso',parameters('topLevelManagementGroupPrefix'))]",
     "roleDefinitionsByCloudType": {
       "All": "[variables('loadRoleDefinitions').All]",
       "AzureCloud": "[variables('loadRoleDefinitions').AzureCloud]",
