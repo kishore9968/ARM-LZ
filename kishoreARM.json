@@ -98,9 +98,14 @@
                 "templateLink": {
                     "contentVersion": "1.0.0.0",
                     "uri": "[variables('deploymentUris').roleDefinitions]"
+                },
+                "parameters": {
+                    "topLevelManagementGroupPrefix": {
+                        "value": "[parameters('topLevelManagementGroupPrefix')]"
+                    }
                 }
+             }
             }
-        }
                      
        ],
     "outputs": {}
