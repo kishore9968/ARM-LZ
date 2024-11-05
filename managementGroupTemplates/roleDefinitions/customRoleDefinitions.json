@@ -154,7 +154,7 @@
       },
       "type": "Microsoft.Authorization/roleDefinitions",
       "apiVersion": "2022-04-01",
-      "name": "[guid(variables('roleDefinitions')[copyIndex()].properties.roleName, managementGroup().name)]",
+      "name": "[guid(variables('roleDefinitions')[copyIndex()].properties.roleName)]",
       "properties": {
         "roleName": "[format('[{0}] {1}', managementGroup().name, variables('roleDefinitions')[copyIndex()].properties.roleName)]",
         "description": "[variables('roleDefinitions')[copyIndex()].properties.description]",
