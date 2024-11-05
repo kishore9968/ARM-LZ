@@ -140,7 +140,7 @@
                     }
                 }
             }
-        },
+        }/*,
         {
             // Deploying ESLZ custom initiatives.
             "type": "Microsoft.Resources/deployments",
@@ -167,7 +167,7 @@
                     }
                 }
             }
-        }
+        }*/
 
                      
        ],
