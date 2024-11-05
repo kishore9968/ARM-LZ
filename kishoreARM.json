@@ -117,7 +117,7 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2019-10-01",
             "name": "[variables('deploymentNames').policyDeploymentName]",
-            "location": "[deployment().location]",
+            "location": "[parameters('location')]",
             "scope": "[concat('Microsoft.Management/managementGroups/', parameters('topLevelManagementGroupPrefix'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').mgmtGroupDeploymentName)]"
