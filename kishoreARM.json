@@ -2,11 +2,11 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "singlePlatformSubscriptionId": {
-            "type": "string",
-            "defaultValue": "",
-            "maxLength": 36
-        },
+        // "singlePlatformSubscriptionId": {
+        //     "type": "string",
+        //     "defaultValue": "",
+        //     "maxLength": 36
+        // },
          "currentDateTimeUtcNow": {
             "type": "string",
             "defaultValue": "[utcNow()]",
@@ -18,6 +18,27 @@
             "type": "string",
             "metadata": {
                 "description": "Provide prefix for the management group structure."
+            }
+        },
+        "platformMgs": {
+            "type": "array",
+            "defaultValue": [
+                "management",
+                "connectivity",
+                "identity"
+            ],
+            "metadata": {
+                "description": "Management groups for platform specific purposes, such as management, networking, identity etc."
+            }
+        },
+        "landingZoneMgs": {
+            "type": "array",
+            "defaultValue": [
+                "online",
+                "corp"
+            ],
+            "metadata": {
+                "description": "These are the landing zone management groups."
             }
         }
         
@@ -51,8 +72,14 @@
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
                         "value": "[parameters('topLevelManagementGroupPrefix')]"
-                    }
-                }  
+                    },
+                    "platformMgs": {
+                        "value": "[parameters('platformMgs')]"
+                    },
+                    "landingZoneMgs": {
+                        "value": "[parameters('landingZoneMgs')]"
+                   }  
+                }
             }
         }
             /*{
