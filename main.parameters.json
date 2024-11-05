@@ -3,19 +3,16 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "topLevelManagementGroupPrefix": {
-            "value": "demo3" 
+            "value": "kishore" 
         },
         "platformMgs": {
             "value": [
-                "management",
-                "connectivity",
-                "identity"
+                "management"
             ]
         },
         "landingZoneMgs": {
             "value": [
-                "online",
-                "corp"
+                "online"
             ]
         }
     }
