@@ -7,39 +7,11 @@
             "defaultValue": "",
             "maxLength": 36
         },
-        "enterpriseScaleCompanyPrefix": {
-            "type" : "string",
-            "maxLength": 10,
-            "metadata": {
-                "description": "Provide a prefix (max 10 characters, unique at tenant-scope) for the Management Group hierarchy and other resources created as part of Enterprise-scale."
-            }
-        },
          "currentDateTimeUtcNow": {
             "type": "string",
             "defaultValue": "[utcNow()]",
             "metadata": {
                 "description": "The current date and time using the utcNow function. Used for deployment name uniqueness"
-            }
-        },
-        "platformMgs": {
-            "type": "array",
-            "defaultValue": [
-                "management",
-                "connectivity",
-                "identity"
-            ],
-            "metadata": {
-                "description": "Management groups for platform specific purposes, such as management, networking, identity etc."
-            }
-        },
-        "landingZoneMgs": {
-            "type": "array",
-            "defaultValue": [
-                "online",
-                "corp"
-            ],
-            "metadata": {
-                "description": "These are the landing zone management groups."
             }
         },
         "topLevelManagementGroupPrefix": {
@@ -53,7 +25,7 @@
     
     "functions": [],
     "variables": {
-        "deploymentSuffix": "[concat('-', '-', guid(parameters('enterpriseScaleCompanyPrefix'), parameters('currentDateTimeUtcNow')))]",
+        "deploymentSuffix": "[concat('-', '-', guid(parameters('topLevelManagementGroupPrefix'), parameters('currentDateTimeUtcNow')))]",
         "deploymentNames": {
             "mgmtGroupDeploymentName": "[take(concat('alz-MgsLite', variables('deploymentSuffix')), 64)]",
             "roleDefsDeploymentName": "[take(concat('alz-RoleDefs', variables('deploymentSuffix')), 64)]"
@@ -78,11 +50,11 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[parameters('topLevelManagementGroupPrefix')]"
                     }
-                }
+                }  
             }
-            }
+        }
             /*{
             // Deploying ALZ Custom RBAC Role Definitions
             "type": "Microsoft.Resources/deployments",
@@ -102,7 +74,7 @@
                 }
             }
         }*/
-            
-    ],
+                     
+       ],
     "outputs": {}
 }
