@@ -28,6 +28,10 @@
             "metadata": {
                 "description": "These are the landing zone management groups."
             }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue" : "[deployment().location]"
         }
 
     },
@@ -53,6 +57,9 @@
                 },
                 "landingZoneMgs": {
                     "value": "[parameters('landingZoneMgs')]"
+                },
+                "location": {
+                    "value": "[parameters('location')]"
                 }
             }
         }
