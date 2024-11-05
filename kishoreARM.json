@@ -49,11 +49,13 @@
         "deploymentSuffix": "[concat('-', '-', guid(parameters('topLevelManagementGroupPrefix'), parameters('currentDateTimeUtcNow')))]",
         "deploymentNames": {
             "mgmtGroupDeploymentName": "[take(concat('alz-MgsLite', variables('deploymentSuffix')), 64)]",
-            "roleDefsDeploymentName": "[take(concat('alz-RoleDefs', variables('deploymentSuffix')), 64)]"
+            "roleDefsDeploymentName": "[take(concat('alz-RoleDefs', variables('deploymentSuffix')), 64)]",
+            "policyDeploymentName": "[take(concat('alz-Policy', variables('deploymentSuffix')), 64)]"
         },
         "deploymentUris": {
             "managementGroups": "[uri(deployment().properties.templateLink.uri, 'managementGroupTemplates/mgmtGroupStructure/mgmtGroups.json')]",
-            "roleDefinitions": "[uri(deployment().properties.templateLink.uri, 'managementGroupTemplates/roleDefinitions/customRoleDefinitions.json')]"
+            "roleDefinitions": "[uri(deployment().properties.templateLink.uri, 'managementGroupTemplates/roleDefinitions/customRoleDefinitions.json')]",
+            "policyDefinitions": "managementGroupTemplates/policyDefinitions/policies.json"
         }
     },
     
@@ -105,7 +107,32 @@
                     }
                 }
              }
+        },
+            {
+            // Deploying ESLZ custom policies.
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "[variables('deploymentNames').policyDeploymentName]",
+            "location": "[deployment().location]",
+            "scope": "[concat('Microsoft.Management/managementGroups/', parameters('topLevelManagementGroupPrefix'))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').mgmtGroupDeploymentName)]"
+                
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "[variables('deploymentUris').policyDefinitions]"
+                },
+                "parameters": {
+                    "topLevelManagementGroupPrefix": {
+                        "value": "[parameters('topLevelManagementGroupPrefix')]"
+                    }
+                }
             }
+        }
+
                      
        ],
     "outputs": {}
